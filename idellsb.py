@@ -4,7 +4,7 @@ import os
 # Get user input
 print("This is the LSB steganography technique, please enter your name.")
 name = input("Enter your full name: ")
-image_path = input("Enter your image file name\n")
+image_path = input("Enter your image file name. This program assumes that you have the image and the current script running in the same folder:\n")
 
 
 def text_to_binary(text):
@@ -27,9 +27,26 @@ def text_to_binary(text):
 #def lsb_hide_image(image_path, text, output_image_path, start_pixel=0, channels=['R', 'G', 'B']):
 
 def lsb_hide_image1(text):
+    #we get the name of the person first wrote
     binary_name = text_to_binary(name)
-    
-    image = Image.open(image_path);
+    #this gets the current path of the image assuming its in the same directory
+    current_path = os.getcwd()
+    current_path = current_path + image_path
+    #open the image
+    image = Image.open(current_path);
+    #we get the pixels
+    pixels = list(image.getdata())  
+
+    #array to hold the vlaues of the rgb pixesl
+    pixel_values = []
+
+    #check what kind of image it is, if its RGB we add it to the array 
+    if image.mode == 'RGB':  
+        for pixel in pixels:
+            pixel_values.extend(pixel)
+    else:
+        # no need to do it for grayscale
+        pixel_values = pixels
 
     
 lsb_hide_image1(name)
