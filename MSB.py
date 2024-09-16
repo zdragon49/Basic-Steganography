@@ -1,5 +1,3 @@
-# Lukas Mikulenas
-# I pledge my honor that I have abided by the Stevens Honor System
 from PIL import Image
 import os
 
